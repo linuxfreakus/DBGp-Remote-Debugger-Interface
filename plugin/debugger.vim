@@ -116,15 +116,10 @@ if !has("python")
     finish
 endif
 
-
-if filereadable($VIMRUNTIME."/plugin/debugger.py")
-  pyfile $VIMRUNTIME/plugin/debugger.py
-elseif filereadable($HOME."/.vim/plugin/debugger.py")
-  pyfile $HOME/.vim/plugin/debugger.py
-elseif filereadable($VIM."/vimfiles/plugin/debugger.py")
-  pyfile $VIM/vimfiles/plugin/debugger.py
+if filereadable(expand("%:p:h")."/debugger.py")
+    execute "pyfile ".fnameescape(expand("%:p:h")."/debugger.py")
 else
-  call confirm('debugger.vim: Unable to find debugger.py. Place it in either your home vim directory or in the Vim runtime directory.', 'OK')
+    call confirm('debugger.vim: Unable to find debugger.py. Place it in either your home vim directory or in the Vim runtime directory.', 'OK')
 endif
 
 
