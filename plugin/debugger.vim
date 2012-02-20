@@ -108,6 +108,10 @@
 "
 "=============================================================================
 
+"=============================================================================
+" get the filename of this script
+"=============================================================================
+let s:scriptfile=expand("<sfile>")
 
 "=============================================================================
 " check that everything is OK
@@ -116,8 +120,8 @@ if !has("python")
     finish
 endif
 
-if filereadable(expand("%:p:h")."/debugger.py")
-    execute "pyfile ".fnameescape(expand("%:p:h")."/debugger.py")
+if filereadable(fnameescape(fnamemodify(s:scriptfile, ":h")."/debugger.py"))
+    execute "pyfile ".fnameescape(fnamemodify(s:scriptfile, ":h")."/debugger.py")
 else
     call confirm('debugger.vim: Unable to find debugger.py. Place it in either your home vim directory or in the Vim runtime directory.', 'OK')
 endif
